@@ -1,7 +1,11 @@
 package com.projetospring.firstproject.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /*
 Serializable
@@ -18,6 +22,14 @@ public class Category implements Serializable {
 	private Long id;
 	private String name;
 	
+	//Anotation que vai efetuar um pré-processamento para dizer que não é para serializar essa categoria
+	@JsonIgnore
+	private List<Product> products = new ArrayList<>();
+	// Implementando uma lista Product
+	
+	public Category() {
+		
+	} 
 	
 	public Category(Long id, String name) {
 		super();
@@ -40,7 +52,12 @@ public class Category implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	// importar o get da List, não precisa colocar o set pois em momento algum vou trocar a minha lista
+	public List<Product> getProducts() {
+		return products;
+	}
+		
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
