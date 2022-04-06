@@ -3,6 +3,13 @@ package com.projetospring.firstproject.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /*Serializable
 Ela dá capacidade da classe produzir um formato em que os dados do objeto sejam usados de forma externa ao
 código, em geral ele é persistido em alguma forma de armazenamento temporário ou permanente ou é 
@@ -10,15 +17,22 @@ transmitido para outro recurso.
 
 Este formato pode ser texto ou binário em diversas variantes padrões ou proprietárias. É muito comum usar 
 JSON ou XML.*/
+//Mapear as classes por meio de anotações "@"
+@Entity
 public class Product implements Serializable{
 	
 	//inserir a opção default	
 	private static final long serialVersionUID = 1L;
 	
+	@Id // atributo da chave primária
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //Id auto imcrementável
 	private Long id;
 	private String name;
 	private Double price;
 	
+	// informa que o atributo Category vai ser uma chave estrangeira da tabela produto
+	@ManyToOne // relacionamento
+	@JoinColumn(name = "category_id")
 	private Category category;
 	
 	// Um contrutor vazio

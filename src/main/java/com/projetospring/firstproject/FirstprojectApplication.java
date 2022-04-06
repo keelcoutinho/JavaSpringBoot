@@ -30,13 +30,15 @@ public class FirstprojectApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		Category cat1 = new Category(1L, "Electronics");
-		Category cat2 = new Category(2L, "Books");
+		// alterar os Ids, deixando nulos porque serão auto incrementados
+		Category cat1 = new Category(null, "Electronics");
+		Category cat2 = new Category(null, "Books");
 
-		Product p1 = new Product(1L, "TV", 2500.00, cat1);
-		Product p2 = new Product(2L, "Domain Driven Design", 120.00, cat2);
-		Product p3 = new Product(3L, "PS5", 4800.00, cat1);
-		Product p4 = new Product(4L, "Docker", 100.00, cat2);
+		// alterar os Ids, deixando nulos porque serão auto incrementados
+		Product p1 = new Product(null, "TV", 2500.00, cat1);
+		Product p2 = new Product(null, "Domain Driven Design", 120.00, cat2);
+		Product p3 = new Product(null, "PS5", 4800.00, cat1);
+		Product p4 = new Product(null, "Docker", 100.00, cat2);
 		
 		// relacinar os produtos as categorias usando o metodo addAll e Array.asList
 		cat1.getProducts().addAll(Arrays.asList(p1, p3));

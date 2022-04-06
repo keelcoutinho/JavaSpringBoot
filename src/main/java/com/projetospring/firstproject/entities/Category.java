@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /*
@@ -15,15 +21,20 @@ transmitido para outro recurso.
 
 Este formato pode ser texto ou binário em diversas variantes padrões ou proprietárias. É muito comum usar 
 JSON ou XML.*/
-
+@Entity
 public class Category implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	
+	@Id // atributo da chave primária
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //Id auto imcrementável
 	private Long id;
 	private String name;
 	
 	//Anotation que vai efetuar um pré-processamento para dizer que não é para serializar essa categoria
 	@JsonIgnore
+	@OneToMany(mappedBy = "category")// mapear a lista de produtos para que o JPA já instancie os produtos de uma categoria
+	//no OneToMany tem que colocar o atributo -> mappedBy = "category" da classe Produto
 	private List<Product> products = new ArrayList<>();
 	// Implementando uma lista Product
 	
